@@ -135,7 +135,6 @@ class UserController {
             }]
         })
 
-        // let sub
         let count = 0
         let friendsIdArr = []
 
@@ -175,8 +174,6 @@ class UserController {
                 })
             resultArr.push(result[0])
         }
-
-        // let ress = resultArr.sort((a, b) => b - a)
 
         return res.json(resultArr)
     }
