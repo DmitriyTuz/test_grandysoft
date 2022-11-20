@@ -4,5 +4,4 @@ const subscriptionController = require('../controllers/subscriptionController')
 
 router.post('/createSubscription', subscriptionController.createSubscription)
 
-
 module.exports = router

@@ -3,7 +3,7 @@ const db = require('../models')
 const ApiError = require('../error/ApiError')
 
 const {userA, subscription, friend} = require('../models/index')
-const {getAllUsersS, getUsersS} = require("../utils/userFunctions");
+const {getAllUsersS, getUsersS} = require("../services/userFunctions");
 
 class UserController {
 

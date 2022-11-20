@@ -3,7 +3,7 @@ require('dotenv').config()
 const sequelize = require('./db')
 const http = require("http")
 
-const createMyServer = require('./utils/server')
+const createMyServer = require('./services/server')
 const app = createMyServer()
 module.exports = app
 
