@@ -1,10 +1,8 @@
 const db = require('../models')
-const Sequelize = require('sequelize')
-const { QueryTypes } = require('sequelize')
 
 const ApiError = require('../error/ApiError')
 
-const {userA, userB, subscription, friend} = require('../models/index')
+const {userA, subscription, friend} = require('../models/index')
 const {getAllUsersS, getUsersS} = require("../utils/userFunctions");
 
 class UserController {

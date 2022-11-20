@@ -3,7 +3,8 @@ const {userA, userB, subscription, friend} = require('../models/index')
 class userFunctions {
 
     async getAllUsersS() {
-        const users = await userA.findAll({
+
+        return await userA.findAll({
             attributes: ["id", "first_name", "gender"],
             separate: true,
             order: [['id']],
@@ -12,12 +13,11 @@ class userFunctions {
                 required: false
             }]
         })
-
-        return users
     }
 
     async getUsersS() {
-        const users = await userA.findAll({
+
+        return await userA.findAll({
             attributes: ["id", "first_name", "gender"],
             separate: true,
             order: [['id']],
@@ -26,8 +26,6 @@ class userFunctions {
                 required: true
             }]
         })
-
-        return users
     }
 
 }
