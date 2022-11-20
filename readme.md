@@ -2,9 +2,9 @@
                2) Postgres - v.12.12
 2. Команды для Node в терминале среды разработки:
     - nmp install (для установки нужных модулей)
-    - npx sequelize-cli db:migrate (для запуска миграций - в ней создаются
-      таблицы userA, userB и связывающуя их subscription) также в миграциях
-      осуществляется заполнение этих таблиц случайным образом
+    - npx sequelize-cli db:migrate (для запуска миграций - в них создаются
+      таблицы userA, userB и связывающуя их subscription, а также таблица friend) 
+      также в миграциях осуществляется заполнение этих таблиц случайным образом
     - npm start (запуск)
 3. Проверял используя Postmen
 
@@ -17,7 +17,7 @@ endpoints:
 4. http://localhost:5000/users/getFriendsAndPutToDatabase - получение друзей 
 и сохранение их в базе данных в таблице friends (просто запустить 1 раз чтобы друзья 
 сохранились в базе для выполнения следующего задания)
-5. http://localhost:5000/users/trainFunction?order_by=id&order_type=desc - получаем
+5. http://localhost:5000/users/123/friends/?order_by=id&order_type=desc - получаем
    друзей с заданной в данном запросе сортировкой.
 
 
