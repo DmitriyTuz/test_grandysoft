@@ -5,6 +5,7 @@ const { QueryTypes } = require('sequelize')
 const ApiError = require('../error/ApiError')
 
 const {userA, userB, subscription, friend} = require('../models/index')
+const {getAllUsersS, getUsersS} = require("../utils/userFunctions");
 
 class UserController {
 
@@ -13,51 +14,19 @@ class UserController {
         return res.json(users)
     }
 
-    async getAllUsersWithSubscriptionsAndNo(req, res, next) {
+    async getAllUsersWithSubscriptions(req, res, next) {
+
         try {
-            const users = await userA.findAll({
-                attributes: ["id", "first_name", "gender"],
-                separate: true,
-                order: [['id']],
-                include: [{
-                    model: userB, attributes: ["id", "first_name", "gender"],
-                    required: false
-                }]
-            })
-
+            const users = await getAllUsersS()
             return res.json(users)
-
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
     }
 
-    async getAllUsersWithSubscriptions(req, res) {
-
-        const users = await userA.findAll({
-            attributes: ["id", "first_name", "gender"],
-            separate: true,
-            order: [['id']],
-            include: [{
-                model: userB, attributes: ["id", "first_name", "gender"],
-                required: true,
-            }]
-        })
-
-        return res.json(users)
-    }
-
     async getAllUsersWithNoSubscriptions(req, res) {
 
-        const users = await userA.findAll({
-            attributes: ["id", "first_name", "gender"],
-            separate: true,
-            order: [['id']],
-            include: [{
-                model: userB, attributes: ["id", "first_name", "gender"],
-                required: false,
-            }]
-        })
+        const users = await getAllUsersS()
 
         let arrUsersIdWithNoS = []
 
@@ -81,15 +50,8 @@ class UserController {
     }
 
     async getTop5UsersWithMaxSubscriptions(req, res) {
-        const users = await userA.findAll({
-            attributes: ["id", "first_name", "gender"],
-            separate: true,
-            order: [['id']],
-            include: [{
-                model: userB, attributes: ["id", "first_name", "gender"],
-                required: false,
-            }]
-        })
+
+        const users = await getAllUsersS()
 
         let lengthArr = []
 
@@ -127,15 +89,7 @@ class UserController {
 
     async getFriendsAndPutToDatabase(req, res) {
 
-        const users = await userA.findAll({
-            attributes: ["id", "first_name", "gender"],
-            separate: true,
-            order: [['id']],
-            include: [{
-                model: userB, attributes: ["id", "first_name", "gender"],
-                required: true,
-            }]
-        })
+        const users = await getUsersS()
 
         let count = 0
         let friendsIdArr = []
