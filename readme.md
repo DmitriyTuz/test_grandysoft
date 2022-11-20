@@ -14,6 +14,10 @@ endpoints:
 2. http://localhost:5000/users/not-following - получаем юзеров без подписки
 3. http://localhost:5000/users/max-following - получаем топ 5 юзеров с максимальным 
 количеством подписок
-4. http://localhost:5000/users/friends - получение друзей 
+4. http://localhost:5000/users/getFriendsAndPutToDatabase - получение друзей 
+и сохранение их в базе данных в таблице friends (просто запустить 1 раз чтобы друзья 
+сохранились в базе для выполнения следующего задания)
+5. http://localhost:5000/users/trainFunction?order_by=id&order_type=desc - получаем
+   друзей с заданной в данном запросе сортировкой.
 
 

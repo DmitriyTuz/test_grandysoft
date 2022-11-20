@@ -1,8 +1,10 @@
-const Sequelize = require('sequelize');
+const db = require('../models')
+const Sequelize = require('sequelize')
+const { QueryTypes } = require('sequelize')
 
 const ApiError = require('../error/ApiError')
 
-const {userA, userB, subscription} = require('../models/index')
+const {userA, userB, subscription, friend} = require('../models/index')
 
 class UserController {
 
@@ -123,7 +125,7 @@ class UserController {
         return res.json(resultArr)
     }
 
-    async getFriends(req, res) {
+    async getFriendsAndPutToDatabase(req, res) {
 
         const users = await userA.findAll({
             attributes: ["id", "first_name", "gender"],
@@ -161,21 +163,41 @@ class UserController {
 
             }
         }
-        friendsIdArr.sort((a, b) => a - b)
+        // friendsIdArr.sort((a, b) => a - b)
 
-        let result
+
         let resultArr = []
 
+
         for (let i = 0; i < friendsIdArr.length; i++) {
-            result = await userA.findAll(
+            let result = await userA.findAll(
                 {
                     where: {id: friendsIdArr[i]
                     }
                 })
+
             resultArr.push(result[0])
         }
 
+        for (let i = 0; i < resultArr.length; i++) {
+            await friend.create({
+                id: resultArr[i].id,
+                first_name: resultArr[i].first_name,
+                gender: resultArr[i].gender
+            })
+        }
+
         return res.json(resultArr)
+    }
+
+    async getFriendsWithOrder(req, res) {
+
+        const {order_by, order_type} = req.query
+
+        let query = `SELECT * FROM "friends" ORDER BY ${order_by} ${order_type}`
+        let result = await db.sequelize.query(query, {type: db.sequelize.QueryTypes.SELECT})
+
+        return res.json(result)
     }
 
 }

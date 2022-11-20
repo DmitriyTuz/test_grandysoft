@@ -7,6 +7,10 @@ router.get('/getAllUsersWithSubscriptionsAndNo', userController.getAllUsersWithS
 router.get('/users', userController.getAllUsersWithSubscriptions)
 router.get('/not-following', userController.getAllUsersWithNoSubscriptions)
 router.get('/max-following', userController.getTop5UsersWithMaxSubscriptions)
-router.get('/friends', userController.getFriends)
+router.get('/getFriendsAndPutToDatabase', userController.getFriendsAndPutToDatabase)
+router.get('/123/friends', userController.getFriendsWithOrder)
+
+
+
 
 module.exports = router
