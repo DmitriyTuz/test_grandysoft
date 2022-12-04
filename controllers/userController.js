@@ -82,7 +82,9 @@ class UserController {
             resultArr.push(result[0])
         }
 
+        console.log('values of max 5 subscriptions - ',maxFiveLengthArr)
         return res.json(resultArr)
+        // return res.json(maxFiveLengthArr)
     }
 
     async getFriendsAndPutToDatabase(req, res) {

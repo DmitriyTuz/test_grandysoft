@@ -20,5 +20,22 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'subscription',
   });
+
+  subscription.beforeCreate(async (instance, options) => {
+    // try {
+      const result = await subscription.findAll({
+        where: {
+          userAId: instance.userAId
+        }
+      });
+      if(result.length === 150) {
+        throw new Error(`Cannot create more instnaces for ${instance.userAId}`);
+      }
+  //   }
+  //   catch(e) {
+  //     throw e; // You must throw an error inside the hook in order to cancel
+  //              // the real statement execution.
+  //   }
+  });
   return subscription;
 };

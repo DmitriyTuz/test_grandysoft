@@ -23,7 +23,7 @@ module.exports = {
 
     for (let i = 0; i < 200; i++) {
       n = getRandomArbitrary(0, 3)
-      console.log('n = ', n)
+      // console.log('n = ', n)
       if (['John', 'Steve'].includes(arrName[n])) {
         gender = 'male' } else gender = 'female'
 
@@ -34,11 +34,18 @@ module.exports = {
 
     let k,l
 
-    for (let j = 0; j < 150; j++) {
+    for (let j = 0; j < 50000; j++) {
       k = getRandomArbitrary(1, 200)
       l = getRandomArbitrary(1, 200)
 
-      if (k !== l) {
+      let sub = await subscription.findAll({
+        where: {
+          userAId: k,
+          userBId: l
+        }
+      })
+
+      if (!sub[0] && k !== l) {
         await subscription.create({userAId: k, userBId: l})
       }
 
