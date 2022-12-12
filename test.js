@@ -77,17 +77,53 @@
 
 // }
 
-const {subscription} = require('./models/index')
+const {userA, userB, subscription} = require('./models/index')
+//
+// let funct = async () => {
+//     let sub = await subscription.findAll({
+//         where: {
+//             userAId: 1,
+//             userBId: 2
+//         }
+//     })
+//     console.log('sub = ', sub[0])
+//     return sub
+// }
+//
+// funct()
 
-let funct = async () => {
-    let sub = await subscription.findAll({
+const { Op } = require("sequelize");
+
+let fun = async () => {
+
+    let user = await userA.findAll({
+
+        attributes: ["id", "first_name", "gender"],
+        // where:
+        //     'id' > 10,
+        separate: true,
+        order: [['id']],
+        limit: 3,
+        include: [{
+            model: userB, attributes: ["id", "first_name", "gender"],
+            required: true,
+        }],
         where: {
-            userAId: 1,
-            userBId: 2
+            userBs: {
+                [Op.ne]: 1
+            }
         }
-    })
-    console.log('sub = ', sub[0])
-    return sub
-}
 
-funct()
+        // where: {
+        //     userBs: []
+        // },
+
+        // separate: true,
+        // order: [['userBs']],
+
+    })
+    console.log('!!! user = ', user)
+
+    return user
+}
+fun()

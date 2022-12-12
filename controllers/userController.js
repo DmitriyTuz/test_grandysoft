@@ -51,7 +51,7 @@ class UserController {
 
         const users = await getAllUsersS()
 
-        let lengthArr = []
+        let lengthArr = [] // массив состоящий из количества подписок для каждого юзера
 
         for (let i = 0; i < users.length; i++) {
             let length = users[i].dataValues.userBs.length
@@ -60,8 +60,8 @@ class UserController {
 
         const maxFive = (arr) => arr.slice().sort((a, b) => b - a).slice(0, 5)
 
-        let maxFiveLengthArr = maxFive(lengthArr)
-        let resultIdArrAll = []
+        let maxFiveLengthArr = maxFive(lengthArr) // массив состоящий из 5ти самых больших значений количества подписок
+        let resultIdArrAll = [] // массив состоящий из 5ти id-ков юзеров с самым большим количеством подписок
 
         for (let j = 0; j < maxFiveLengthArr.length; j++) {
             for (let i = 0; i < users.length; i++) {
@@ -75,14 +75,19 @@ class UserController {
         let result
         let resultArr = []
 
-        for (let i = 0; i < resultIdArrFive.length; i++) {
-            result = await userA.findAll(
-                { where: {id: resultIdArrFive[i]}
-                })
-            resultArr.push(result[0])
-        }
 
-        console.log('values of max 5 subscriptions - ',maxFiveLengthArr)
+            .
+
+        // for (let i = 0; i < resultIdArrFive.length; i++) {
+        //     result = await userA.findAll(
+        //         { where: {id: resultIdArrFive[i]}
+        //         })
+        //     resultArr.push(result[0])
+        // }
+
+        console.log('values of max 5 subscriptions - ', maxFiveLengthArr)
+
+        // return res.json(users)
         return res.json(resultArr)
         // return res.json(maxFiveLengthArr)
     }

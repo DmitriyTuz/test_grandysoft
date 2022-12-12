@@ -21,6 +21,8 @@ class userFunctions {
             attributes: ["id", "first_name", "gender"],
             separate: true,
             order: [['id']],
+            // order: [['userBs'.length]],
+            // limit: 5,
             include: [{
                 model: userB, attributes: ["id", "first_name", "gender"],
                 required: true

@@ -19,7 +19,3 @@ endpoints:
 сохранились в базе для выполнения следующего задания)
 5. http://localhost:5000/users/123/friends/?order_by=id&order_type=desc - получаем
    друзей с заданной в данном запросе сортировкой
-
-P.S.  если друзей нет то можно для проверки добавить пару строк в таблицу subscriptions
-      чтобы они точно были.
-      endpoint для этого - http://localhost:5000/subscription/createSubscription
